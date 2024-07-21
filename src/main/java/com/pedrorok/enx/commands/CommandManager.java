@@ -104,6 +104,6 @@ public class CommandManager implements TabExecutor {
     }
 
     private void sendFormMsg(CommandSender sender, String message) {
-        sender.sendMessage(MiniMessage.miniMessage().deserialize(CommandManager.PREFIX + message));
+        sender.sendMessage(CommandManager.PREFIX + message);
     }
 }
