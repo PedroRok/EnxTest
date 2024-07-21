@@ -1,0 +1,10 @@
+name: EnxTest
+version: '1.0'
+main: com.pedrorok.enx.Main
+api-version: '1.21'
+authors: [ Pedro ]
+website: pedrorok.com
+commands:
+  enx:
+    description: Comando principal do plugin
+    usage: /enx
