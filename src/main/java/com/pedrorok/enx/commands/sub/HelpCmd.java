@@ -25,11 +25,11 @@ public class HelpCmd implements Subcommand {
         sendMsg(sender,"§eLista de comandos:");
 
         for (Subcommand cmd : CommandManager.get().getCommands()) {
-            if (cmd.inGameOnly() && !(sender instanceof Player) || (!cmd.getPermission().equals("") && !sender.hasPermission(cmd.getPermission()) && !sender.hasPermission("swm.*"))) {
+            if (cmd.inGameOnly() && !(sender instanceof Player) || (!cmd.getPermission().isEmpty() && !sender.hasPermission(cmd.getPermission()) && !sender.hasPermission("swm.*"))) {
                 continue;
             }
 
-            sendMsg(sender,"  -§e/ " + cmd.getUsage() + "§7 - " + cmd.getDescription());
+            sendMsg(sender," - §e/enx " + cmd.getUsage() + "§7 - " + cmd.getDescription());
         }
 
         return true;
