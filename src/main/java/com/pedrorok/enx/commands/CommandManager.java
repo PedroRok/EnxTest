@@ -50,9 +50,8 @@ public class CommandManager implements TabExecutor {
             return true;
         }
 
-        if (!command.getPermission().equals("") && !sender.hasPermission(command.getPermission()) && !sender.hasPermission("enx.*")) {
+        if (!command.getPermission().isEmpty() && !sender.hasPermission(command.getPermission()) && !sender.hasPermission("enx.*")) {
             sendFormMsg(sender, "§cVocê não tem permissão para isso.");
-
             return true;
         }
 
@@ -80,8 +79,7 @@ public class CommandManager implements TabExecutor {
                 final String name = entry.getKey();
                 final Subcommand subcommand = entry.getValue();
 
-                if (name.startsWith(typed) && !subcommand.getPermission().equals("")
-                        && (sender.hasPermission(subcommand.getPermission()) || sender.hasPermission("enx.*"))) {
+                if ((name.startsWith(typed) && ((sender.hasPermission(subcommand.getPermission()) || sender.hasPermission("enx.*")) || subcommand.getPermission().isEmpty()))) {
                     if (toReturn == null) {
                         toReturn = new LinkedList<>();
                     }
