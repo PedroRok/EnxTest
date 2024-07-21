@@ -37,7 +37,7 @@ public class CommandManager implements TabExecutor {
             return true;
         }
 
-        Subcommand command = commands.getOrDefault(args[0], null);
+        Subcommand command = commands.get(args[0]);
 
         if (command == null) {
             sendFormMsg(sender, "§cComando desconhecido. Veja mais sobre digitando: §7/"+label+" help§c.");
