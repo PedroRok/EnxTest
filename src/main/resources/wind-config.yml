@@ -1,0 +1,43 @@
+
+
+# Configurações do WindCharge
+windcharge:
+  power: 0.7                                # default: 0.7 - Potência do WindCharge
+  size: 2.0                                 # default: 2.0 - Área que o WindCharge irá afetar
+  sound:
+    volume: 1.0                             # default: 1.0 - Volume do som do WindCharge
+    pitch: 0.7                              # default: 0.7 - Pitch do som do WindCharge
+    type: "ENTITY_WIND_CHARGE_WIND_BURST"   # default: ENTITY_WIND_CHARGE_WIND_BURST - Som do WindCharge
+  particles:
+    default-particle:
+      type: "GUST_EMITTER_SMALL"
+      amount: 1
+      extra: 0.0 # na sua maioria é usado para a velocidade
+      offset: 0.0
+    block-example:
+      type: "BLOCK" # BLOCK ou BLOCK_MARKER
+      amount: 10
+      extra: 0.1
+      offset: 0.1
+      material: "STONE"
+    colored-example:
+      type: "DUST" # apenas DUST
+      amount: 50
+      extra: 5
+      offset: 0.5
+      color:
+        r: 255
+        g: 255
+        b: 255
+    color-transition-example:
+      type: "DUST_COLOR_TRANSITION" # apenas DUST_COLOR_TRANSITION
+      amount: 50
+      extra: 0.2
+      offset: 1.5
+      color:
+        r: 255
+        g: 255
+        b: 255
+        to-r: 0
+        to-g: 0
+        to-b: 0

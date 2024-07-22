@@ -8,3 +8,6 @@ commands:
   enx:
     description: Comando principal do plugin
     usage: /enx
+  home:
+    description: Comando para ir para a home
+    usage: /home

@@ -4,7 +4,6 @@ import com.destroystokyo.paper.ParticleBuilder;
 import com.pedrorok.enx.Main;
 import com.pedrorok.enx.utils.XConfig;
 import org.bukkit.Sound;
-import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  * @author Rok, Pedro Lucas nmm. Created on 21/07/2024
@@ -15,19 +14,12 @@ public class WindConfig extends XConfig {
     private WindManager windManager;
 
     public WindConfig(WindManager windManager) {
-        super("config.yml", Main.get());
+        super("wind-config.yml", Main.get());
         this.windManager = windManager;
     }
 
     @Override
     public void init() {
-        boolean useCustomWind = config.getBoolean("windcharge.use-custom");
-        if (!useCustomWind) {
-            Main.LOGGER.info("Custom Wind Charge está desativado.");
-            windManager.setUseCustomWind(false);
-            return;
-        }
-        windManager.setUseCustomWind(true);
         // Importando os valores do WindCharge
         double power = config.getDouble("windcharge.power");
         double size = config.getDouble("windcharge.size");
@@ -39,6 +31,7 @@ public class WindConfig extends XConfig {
         try {
             sound = Sound.valueOf(config.getString("windcharge.sound.type"));
         } catch (IllegalArgumentException e) {
+            windManager.setUseCustomWind(false);
             Main.LOGGER.error("Invalid sound type in windcharge.sound.sound");
             return;
         }
@@ -49,6 +42,10 @@ public class WindConfig extends XConfig {
         // Importando as partículas
         for (String key : config.getSection("windcharge.particles").getKeys(false)) {
             ParticleBuilder particleBuilder = config.getParticleBuilder("windcharge.particles." + key);
+            if (particleBuilder == null) {
+                windManager.setUseCustomWind(false);
+                return;
+            }
             windOptions.addParticle(particleBuilder);
         }
 
