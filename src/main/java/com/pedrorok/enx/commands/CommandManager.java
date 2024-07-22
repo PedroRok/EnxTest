@@ -1,8 +1,7 @@
 package com.pedrorok.enx.commands;
 
-import com.pedrorok.enx.commands.sub.ReloadCmd;
 import com.pedrorok.enx.commands.sub.HelpCmd;
-import net.kyori.adventure.text.minimessage.MiniMessage;
+import lombok.Getter;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -12,46 +11,46 @@ import java.util.*;
 
 public class CommandManager implements TabExecutor {
 
-    public static final String PREFIX = "§7[§dEnxTest§7] §r";
+    private final Map<String, SubCommand> commands = new HashMap<>();
 
-    private static CommandManager instance;
-    private final Map<String, Subcommand> commands = new HashMap<>();
+    @Getter
+    private final String prefix;
+    @Getter
+    private final String permissionPrefix;
 
-    public CommandManager() {
-        instance = this;
-        commands.put("help", new HelpCmd());
-        commands.put("reload", new ReloadCmd());
+    public CommandManager(String permissionPrefix, String prefix) {
+        this.prefix = prefix;
+        this.permissionPrefix = permissionPrefix;
+        registerSubCommand("help", new HelpCmd());
     }
 
-    public static CommandManager get() {
-        if (instance == null) {
-            instance = new CommandManager();
-        }
-        return instance;
+    public void registerSubCommand(String name, SubCommand subcommand) {
+        commands.put(name, subcommand);
+        subcommand.setCommandManager(this);
     }
+
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length == 0) {
-            sendFormMsg(sender,"Digite /"+ label +" help para ver os comandos.");
+            sendMsg(sender,"Digite /"+ label +" help para ver os comandos.");
             return true;
         }
 
-        Subcommand command = commands.get(args[0]);
+        SubCommand command = commands.get(args[0]);
 
         if (command == null) {
-            sendFormMsg(sender, "§cComando desconhecido. Veja mais sobre digitando: §7/"+label+" help§c.");
-            return true;
+            return false;
         }
 
         if (command.inGameOnly() && !(sender instanceof Player)) {
-            sendFormMsg(sender,"Esse comando só pode ser executado em jogo.");
+            sendMsg(sender,"Esse comando só pode ser executado em jogo.");
 
             return true;
         }
 
-        if (!command.getPermission().isEmpty() && !sender.hasPermission(command.getPermission()) && !sender.hasPermission("enx.*")) {
-            sendFormMsg(sender, "§cVocê não tem permissão para isso.");
+        if (!command.getPermission().isEmpty() && !sender.hasPermission(command.getPermission()) && !sender.hasPermission(permissionPrefix+".*")) {
+            sendMsg(sender, "§cVocê não tem permissão para isso.");
             return true;
         }
 
@@ -59,13 +58,13 @@ public class CommandManager implements TabExecutor {
         System.arraycopy(args, 1, subCmdArgs, 0, subCmdArgs.length);
 
         if (!command.onCommand(sender, subCmdArgs)) {
-            sendFormMsg(sender,"§cUso do comando: §7/"+label+" <gray>"  + command.getUsage() + "§c.");
+            sendMsg(sender,"§cUso do comando: §7/"+label+" <gray>"  + command.getUsage() + "§c.");
         }
 
         return true;
     }
 
-    public Collection<Subcommand> getCommands() {
+    public Collection<SubCommand> getCommands() {
         return commands.values();
     }
 
@@ -75,11 +74,11 @@ public class CommandManager implements TabExecutor {
         final String typed = args[0].toLowerCase();
 
         if (args.length == 1) {
-            for (Map.Entry<String, Subcommand> entry : commands.entrySet()) {
+            for (Map.Entry<String, SubCommand> entry : commands.entrySet()) {
                 final String name = entry.getKey();
-                final Subcommand subcommand = entry.getValue();
+                final SubCommand subcommand = entry.getValue();
 
-                if ((name.startsWith(typed) && ((sender.hasPermission(subcommand.getPermission()) || sender.hasPermission("enx.*")) || subcommand.getPermission().isEmpty()))) {
+                if ((name.startsWith(typed) && ((sender.hasPermission(subcommand.getPermission()) || sender.hasPermission(permissionPrefix+".*")) || subcommand.getPermission().isEmpty()))) {
                     if (toReturn == null) {
                         toReturn = new LinkedList<>();
                     }
@@ -91,7 +90,7 @@ public class CommandManager implements TabExecutor {
 
         if (args.length > 1) {
             final String subName = args[0];
-            final Subcommand subcommand = commands.get(subName);
+            final SubCommand subcommand = commands.get(subName);
 
             if (subcommand != null) {
                 toReturn = subcommand.onTabComplete(sender, args);
@@ -101,7 +100,7 @@ public class CommandManager implements TabExecutor {
         return toReturn == null ? Collections.emptyList() : toReturn;
     }
 
-    private void sendFormMsg(CommandSender sender, String message) {
-        sender.sendMessage(CommandManager.PREFIX + message);
+    protected void sendMsg(CommandSender sender, String message) {
+        sender.sendMessage(prefix + message);
     }
 }
