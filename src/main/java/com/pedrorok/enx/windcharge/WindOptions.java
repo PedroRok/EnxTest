@@ -43,7 +43,7 @@ public class WindOptions {
 
     public void explode(Location location) {
         windExplode(location);
-        particles.forEach(particle -> particle.location(location).spawn());
+        particles.forEach(particle -> particle.clone().location(location).spawn());
         location.getWorld().playSound(location, sound, volume,pitch);
     }
 

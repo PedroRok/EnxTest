@@ -12,10 +12,11 @@ import lombok.Setter;
 @Getter
 public class WindManager {
 
+    private final WindConfig windConfig;
+
     @Setter(value = AccessLevel.PROTECTED)
     private WindOptions windOptions;
     private boolean useCustomWind;
-    private WindConfig windConfig;
 
     public WindManager() {
         windConfig = new WindConfig(this);
