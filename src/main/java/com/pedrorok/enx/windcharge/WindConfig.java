@@ -30,7 +30,7 @@ public class WindConfig extends XConfig {
         Sound sound;
         try {
             sound = Sound.valueOf(config.getString("windcharge.sound.type"));
-        } catch (IllegalArgumentException e) {
+        } catch (NullPointerException e) {
             windManager.setUseCustomWind(false);
             Main.LOGGER.error("Invalid sound type in windcharge.sound.sound");
             return;
@@ -48,8 +48,6 @@ public class WindConfig extends XConfig {
             }
             windOptions.addParticle(particleBuilder);
         }
-
-        Main.get().getLogger().info("Custom Wind Charge está ativado.");
         windManager.setWindOptions(windOptions);
     }
 
