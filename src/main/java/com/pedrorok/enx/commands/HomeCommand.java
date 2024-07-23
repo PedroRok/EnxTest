@@ -5,7 +5,6 @@ import com.pedrorok.enx.commands.sub.HomeRemoveCmd;
 import com.pedrorok.enx.commands.sub.HomeSetCmd;
 import com.pedrorok.enx.home.HomeManager;
 import com.pedrorok.enx.home.PlayerHomes;
-import lombok.Getter;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -42,14 +41,14 @@ public class HomeCommand extends CommandManager {
                 return true;
             }
             if (playerHomes.getHomes().size() == 1 || playerHomes.getHome("home") == null) {
-                playerHomes.teleportToHome(p, playerHomes.getHomes().entrySet().stream().findFirst().get().getValue());
+                homeManager.teleportPlayer(p, playerHomes.getHomes().entrySet().stream().findFirst().get().getValue());
                 return true;
             }
-            playerHomes.teleportToHome(p, "home");
+            homeManager.teleportPlayer(p, "home");
             return true;
         }
         if (super.onCommand(sender,cmd,label,args)) return true;
-        if (!homeManager.getPlayerHomes(p.getUniqueId()).teleportToHome(p, args[0])) {
+        if (!homeManager.teleportPlayer(p, args[0])) {
             sendMsg(p, "§cEssa home não existe.");
         }
         return true;

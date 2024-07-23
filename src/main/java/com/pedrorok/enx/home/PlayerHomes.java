@@ -42,23 +42,6 @@ public class PlayerHomes {
         return homes.get(homeName);
     }
 
-    public boolean teleportToHome(Player player, String homeName) {
-        return teleportToHome(player, getHome(homeName));
-    }
-
-    public boolean teleportToHome(Player player, Location location) {
-        if (location == null) {
-            return false;
-        }
-        if (location.getWorld() == null) {
-            player.sendMessage("§7[§fHomes§7] §cO mundo da home não existe.");
-            return true;
-        }
-        player.teleport(location);
-        player.sendMessage("§7[§fHomes§7] §aTeleportado para a home.");
-        return true;
-    }
-
     public boolean removeHome(String homeName) {
         return homes.remove(homeName) != null;
     }

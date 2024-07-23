@@ -1,5 +1,6 @@
 package com.pedrorok.enx.home;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Location;
@@ -15,10 +16,17 @@ import java.util.UUID;
  */
 public class HomeManager {
 
+    @Getter
+    private final HomeConfig homeConfig;
     private final Map<UUID, PlayerHomes> homes;
     private HomeDatabase homeDatabase;
 
+    @Setter(value = AccessLevel.PROTECTED)
+    private HomeOptions homeOptions;
+
     public HomeManager() {
+        this.homeConfig = new HomeConfig(this);
+        this.homeConfig.init();
         this.homes = new HashMap<>();
     }
 
@@ -92,9 +100,20 @@ public class HomeManager {
     }
 
 
-    public void teleportPlayer(Player player, Location location) {
-        // Teleport the player to the location
-        player.teleport(location);
+    public boolean teleportPlayer(Player player, String home) {
+        return teleportPlayer(player, getPlayerHome(player.getUniqueId(), home));
+    }
+
+    public boolean teleportPlayer(Player player, Location location) {
+        if (location == null) {
+            return false;
+        }
+        if (location.getWorld() == null) {
+            player.sendMessage("§7[§fHomes§7] §cO mundo da home não existe.");
+            return true;
+        }
+        homeOptions.teleportPlayer(player, location);
+        return true;
     }
 
 }
