@@ -2,6 +2,7 @@ package com.pedrorok.enx;
 
 import com.pedrorok.enx.commands.CommandManager;
 import com.pedrorok.enx.commands.HomeCommand;
+import com.pedrorok.enx.commands.sub.HelpCmd;
 import com.pedrorok.enx.commands.sub.ReloadCmd;
 import com.pedrorok.enx.home.HomeManager;
 import com.pedrorok.enx.windcharge.WindEvents;
@@ -37,6 +38,7 @@ public final class Main extends JavaPlugin {
 
         CommandManager enx = new CommandManager("enx", "§7[§dEnxTest§7] §r");
         enx.registerSubCommand("reload", new ReloadCmd());
+        enx.registerSubCommand("help", new HelpCmd("enx"));
         getServer().getPluginCommand("enx").setExecutor(enx);
 
         getServer().getPluginCommand("home").setExecutor(new HomeCommand(homeManager));

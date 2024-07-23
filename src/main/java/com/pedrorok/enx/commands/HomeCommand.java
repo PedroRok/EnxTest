@@ -1,5 +1,6 @@
 package com.pedrorok.enx.commands;
 
+import com.pedrorok.enx.commands.sub.HelpCmd;
 import com.pedrorok.enx.commands.sub.HomeRemoveCmd;
 import com.pedrorok.enx.commands.sub.HomeSetCmd;
 import com.pedrorok.enx.home.HomeManager;
@@ -25,6 +26,7 @@ public class HomeCommand extends CommandManager {
 
         registerSubCommand("set", new HomeSetCmd(homeManager));
         registerSubCommand("remove", new HomeRemoveCmd(homeManager));
+        registerSubCommand("help", new HelpCmd("home"));
     }
 
     @Override
@@ -59,7 +61,7 @@ public class HomeCommand extends CommandManager {
         if (strings == null || strings.isEmpty()) {
             strings = new ArrayList<>();
         }
-        if (args.length == 1) {
+        if (args.length == 1 || (args.length == 2 && args[0].equalsIgnoreCase("remove"))) {
             PlayerHomes playerHomes = homeManager.getPlayerHomes(((Player) sender).getUniqueId());
             if (playerHomes.getHomes().isEmpty()) return strings;
             strings.addAll(playerHomes.getHomes().keySet());

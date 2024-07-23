@@ -51,11 +51,11 @@ public class PlayerHomes {
             return false;
         }
         if (location.getWorld() == null) {
-            player.sendMessage("§cO mundo da home não existe.");
+            player.sendMessage("§7[§fHomes§7] §cO mundo da home não existe.");
             return true;
         }
         player.teleport(location);
-        player.sendMessage("§aTeleportado para a home.");
+        player.sendMessage("§7[§fHomes§7] §aTeleportado para a home.");
         return true;
     }
 

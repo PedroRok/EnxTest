@@ -32,6 +32,10 @@ public abstract class SubCommand {
         sender.sendMessage(commandManager.getPrefix() + message);
     }
 
+    public void sendMsgSimple(CommandSender sender, String message) {
+        sender.sendMessage(message);
+    }
+
     public boolean hasCmdPerm(CommandSender sender, String permission) {
         return sender.hasPermission(permission) || sender.hasPermission(commandManager.getPermissionPrefix() + "."+permission);
     }

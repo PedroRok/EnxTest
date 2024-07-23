@@ -21,7 +21,7 @@ public class CommandManager implements TabExecutor {
     public CommandManager(String permissionPrefix, String prefix) {
         this.prefix = prefix;
         this.permissionPrefix = permissionPrefix;
-        registerSubCommand("help", new HelpCmd());
+
     }
 
     public void registerSubCommand(String name, SubCommand subcommand) {

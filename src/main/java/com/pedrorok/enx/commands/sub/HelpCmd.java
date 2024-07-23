@@ -8,6 +8,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class HelpCmd extends SubCommand {
+
+    private final String mainCommand;
+    public HelpCmd(String mainCommand) {
+        this.mainCommand = mainCommand;
+    }
+
     @Override
     public String getUsage() {
         return "help";
@@ -27,7 +33,7 @@ public class HelpCmd extends SubCommand {
                 continue;
             }
 
-            sendMsg(sender," - §e/enx " + cmd.getUsage() + "§7 - " + cmd.getDescription());
+            sendMsgSimple(sender," - §e/"+mainCommand+" " + cmd.getUsage() + "§7 - " + cmd.getDescription());
         }
 
         return true;
