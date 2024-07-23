@@ -13,7 +13,7 @@ import java.util.List;
 public class ReloadCmd extends SubCommand {
     @Override
     public boolean onCommand(CommandSender sender, String[] args) {
-        if (args.length != 1) return false;
+        if (args.length != 1) return true;
 
         String module = args[0].toLowerCase();
 
@@ -30,8 +30,7 @@ public class ReloadCmd extends SubCommand {
                 sendMsg(sender, "§aMensagens recarregadas com sucesso!");
                 return true;
             case "homes":
-                Main.get().getMainConfig().reload();
-                Main.get().getMainConfig().loadHomes();
+                Main.get().getHomeManager().getHomeConfig().reload();
                 sendMsg(sender, "§aConfiguração de homes recarregada com sucesso!");
                 return true;
             default:
@@ -42,7 +41,7 @@ public class ReloadCmd extends SubCommand {
 
     @Override
     public List<String> onTabComplete(CommandSender sender, String[] args) {
-        if (args.length != 1) return null;
+        if (args.length != 0) return null;
         return List.of("wind", "database", "homes");
     }
 
