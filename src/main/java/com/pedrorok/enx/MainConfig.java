@@ -33,10 +33,6 @@ public class MainConfig extends XConfig {
         main.getWindManager().setUseCustomWind(config.getBoolean("custom-windcharge"));
     }
 
-    public void loadHomes() {
-        // TODO: import home config
-    }
-
     public void loadDatabase() {
         String url = config.getString("database.host");
         String port = config.getString("database.port");

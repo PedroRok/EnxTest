@@ -58,7 +58,7 @@ public class CommandManager implements TabExecutor {
         System.arraycopy(args, 1, subCmdArgs, 0, subCmdArgs.length);
 
         if (!command.onCommand(sender, subCmdArgs)) {
-            sendMsg(sender,"§cUso do comando: §7/"+label+" <gray>"  + command.getUsage() + "§c.");
+            sendMsg(sender,"§cUso do comando: §e/"+label+" §7"  + command.getUsage() + "§c.");
         }
 
         return true;

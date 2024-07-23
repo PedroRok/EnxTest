@@ -1,0 +1,15 @@
+# Configurações do plugin Home
+home:
+  cooldown: 3                               # use "0" para desabilitar o cooldown
+  show-particles: true
+  use-sounds: true
+  sound:
+    volume: 1.0                             # default: 1.0 - Volume do som do WindCharge
+    pitch: 0.7                              # default: 0.7 - Pitch do som do WindCharge
+    type: "ENTITY_ENDERMAN_TELEPORT"   # default: ENTITY_WIND_CHARGE_WIND_BURST - Som do WindCharge
+  particles:
+    teleport-example:
+      type: "PORTAL"
+      amount: 20
+      extra: 0.0
+      offset: 1.0

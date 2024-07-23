@@ -12,13 +12,3 @@ database:
   database: database
   username: root
   password: ""
-
-home:
-  cooldown: 3
-  show-particles: true
-  particles:
-    teleport-example:
-      type: "ENTITY_ENDER_SIGNAL"
-      amount: 20
-      extra: 0.0
-      offset: 1.0
