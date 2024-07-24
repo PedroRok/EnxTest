@@ -15,11 +15,11 @@ cd EnxTest
 
 ## Comandos
 
-- **/home [nome]** - Teleporta o jogador para a sua home; <br>
-- **/home set [nome]** - Define a home do jogador; <br>
-- **/home delete <nome>** - Deleta a home do jogador; <br>
+- ``/home [nome]`` - Teleporta o jogador para a sua home; <br>
+- ``/home set [nome]`` - Define a home do jogador; <br>
+- ``/home delete <nome>`` - Deleta a home do jogador; <br>
 <br>
-- **/enx reload <wind/homes/database>** - Recarrega as configurações do plugin; <br>
+- ``/enx reload <wind/homes/database>`` - Recarrega as configurações do plugin; <br>
   - wind - Recarrega as configurações do WindCharge; <br>
   - homes - Recarrega as configurações do Home; <br>
   - database - Recarrega e reconecta no banco de dados; <br>
