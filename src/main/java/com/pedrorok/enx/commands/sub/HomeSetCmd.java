@@ -35,7 +35,7 @@ public class HomeSetCmd extends SubCommand {
         }
         homeManager.savePlayerHome(player, args[0].toLowerCase(), player.getLocation());
         sendMsg(player, "§aHome setada com sucesso.");
-        return false;
+        return true;
     }
 
     @Override
