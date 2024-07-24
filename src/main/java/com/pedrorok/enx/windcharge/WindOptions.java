@@ -1,6 +1,7 @@
 package com.pedrorok.enx.windcharge;
 
 import com.destroystokyo.paper.ParticleBuilder;
+import lombok.Getter;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -18,6 +19,8 @@ public class WindOptions {
 
     private final double power;
     private final double size;
+    @Getter
+    private final double velocity;
 
     // Sound
     private final float volume;
@@ -27,9 +30,10 @@ public class WindOptions {
     // Particle List
     private final List<ParticleBuilder> particles;
 
-    public WindOptions(double power, double size, float volume, float pitch, Sound sound) {
+    public WindOptions(double power, double size, double velocity, float volume, float pitch, Sound sound) {
         this.power = power;
         this.size = size;
+        this.velocity = velocity;
         this.volume = volume;
         this.pitch = pitch;
         this.sound = sound;

@@ -5,6 +5,7 @@ import org.bukkit.entity.WindCharge;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.entity.ProjectileLaunchEvent;
 
 /**
  * @author Rok, Pedro Lucas nmm. Created on 20/07/2024
@@ -16,6 +17,13 @@ public class WindEvents implements Listener {
 
     public WindEvents(WindManager windManager) {
         this.windManager = windManager;
+    }
+
+    @EventHandler
+    public void onProjectileShoot(ProjectileLaunchEvent event) {
+        if (!(event.getEntity().getShooter() instanceof WindCharge w)) return;
+        if (!windManager.isUseCustomWind()) return;
+        w.setVelocity(w.getVelocity().multiply(windManager.getWindOptions().getVelocity()));
     }
 
     @EventHandler

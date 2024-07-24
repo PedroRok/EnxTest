@@ -4,6 +4,7 @@
 windcharge:
   power: 0.7                                # default: 0.7 - Potência do WindCharge
   size: 2.0                                 # default: 2.0 - Área que o WindCharge irá afetar
+  velocity: 1.0                             # default: 1.0 - Velocidade do WindCharge
   sound:
     volume: 1.0                             # default: 1.0 - Volume do som do WindCharge
     pitch: 0.7                              # default: 0.7 - Pitch do som do WindCharge

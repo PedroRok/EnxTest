@@ -23,6 +23,7 @@ public class WindConfig extends XConfig {
         // Importando os valores do WindCharge
         double power = config.getDouble("windcharge.power");
         double size = config.getDouble("windcharge.size");
+        double velocity = config.getDouble("windcharge.velocity");
 
         // Importando os valores do som
         float volume = (float) config.getDouble("windcharge.sound.volume");
@@ -37,7 +38,7 @@ public class WindConfig extends XConfig {
         }
 
         // Criando as opções do Charge
-        WindOptions windOptions = new WindOptions(power, size, volume, pitch, sound);
+        WindOptions windOptions = new WindOptions(power, size, velocity, volume, pitch, sound);
 
         // Importando as partículas
         for (String key : config.getSection("windcharge.particles").getKeys(false)) {
