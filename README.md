@@ -125,7 +125,7 @@ home:
 
 
 ## Docker Compose
-Caso deseje utilizar o Docker Compose para subir o banco de dados, utilize o arquivo ``docker-compose.yml``
+Caso deseje utilizar o Docker Compose para subir o banco de dados, utilize o arquivo ``compose.yml``
 ```bash
 docker-compose up -d
 ```
