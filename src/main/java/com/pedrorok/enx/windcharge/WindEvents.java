@@ -24,7 +24,7 @@ public class WindEvents implements Listener {
 
     @EventHandler
     public void onProjectileShoot(ProjectileLaunchEvent event) {
-        if (!(event.getEntity().getShooter() instanceof WindCharge w)) return;
+        if (!(event.getEntity() instanceof WindCharge w)) return;
         if (!windManager.isUseCustomWind()) return;
         w.setVelocity(w.getVelocity().multiply(windManager.getWindOptions().getVelocity()));
     }
