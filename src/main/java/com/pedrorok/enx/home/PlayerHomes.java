@@ -3,10 +3,8 @@ package com.pedrorok.enx.home;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.entity.Player;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,16 +15,14 @@ import java.util.Map;
 @Getter
 public class PlayerHomes {
 
+    // Classe responsável por armazenar as homes de um jogador
+
     private final String playerName;
     private final Map<String, Location> homes;
 
     public PlayerHomes(String playerName) {
         this.playerName = playerName;
         this.homes = new HashMap<>();
-    }
-    public PlayerHomes(String playerName, Map<String, Location> homes) {
-        this.playerName = playerName;
-        this.homes = homes;
     }
 
     public void addHome(String homeName, Location location) {

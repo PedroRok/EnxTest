@@ -3,12 +3,15 @@
 #                 Por Pedro Lucas
 # ------------------------------------------------
 
+# Ativar ou desativar o windcharge customizado
 custom-windcharge: true
 # Configuravel no arquivo "wind-config.yml"
 
+# conexão com o banco de dados
 database:
   host: localhost
   port: 3306
-  database: database
+  database: enxtest
   username: root
-  password: ""
+  password: enxtest
+# O banco de dados está configurado para utilizar MariaDB

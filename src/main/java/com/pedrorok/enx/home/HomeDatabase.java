@@ -16,6 +16,9 @@ import java.util.UUID;
  */
 public class HomeDatabase {
 
+    // Classe responsável por realizar a conexão com o banco de dados e
+    // realizar operações de CRUD com as tabelas de homes e players
+
     private HikariDataSource dataSource;
 
     public HomeDatabase(String dbUrl, String port, String dbName, String dbUser, String dbPassword) {

@@ -19,6 +19,7 @@ public class HomeSetCmd extends SubCommand {
     public HomeSetCmd(HomeManager homeManager) {
         this.homeManager = homeManager;
     }
+
     @Override
     protected boolean onCommand(CommandSender sender, String[] args) {
         Player player = (Player) sender;

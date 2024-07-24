@@ -20,6 +20,7 @@ public class HomeRemoveCmd extends SubCommand {
     public HomeRemoveCmd(HomeManager homeManager) {
         this.homeManager = homeManager;
     }
+
     @Override
     protected boolean onCommand(CommandSender sender, String[] args) {
         Player player = (Player) sender;

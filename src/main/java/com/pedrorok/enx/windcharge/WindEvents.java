@@ -13,7 +13,10 @@ import org.bukkit.event.entity.ProjectileLaunchEvent;
  */
 public class WindEvents implements Listener {
 
-    private WindManager windManager;
+    // Principal classe de modificação de eventos do módulo WindCharge
+    // Responsável por modificar o comportamento de eventos relacionados ao WindCharge
+
+    private final WindManager windManager;
 
     public WindEvents(WindManager windManager) {
         this.windManager = windManager;

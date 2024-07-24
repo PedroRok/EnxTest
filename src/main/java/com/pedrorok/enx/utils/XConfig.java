@@ -9,9 +9,11 @@ import org.bukkit.plugin.java.JavaPlugin;
 public abstract class XConfig {
 
     protected final YamlConfig config;
+
     public XConfig(String fileName, JavaPlugin main) {
         config = new YamlConfig(fileName, main);
     }
+
     public abstract void init();
 
     public abstract void save();

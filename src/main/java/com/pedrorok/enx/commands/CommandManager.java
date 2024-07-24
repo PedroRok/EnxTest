@@ -1,6 +1,5 @@
 package com.pedrorok.enx.commands;
 
-import com.pedrorok.enx.commands.sub.HelpCmd;
 import lombok.Getter;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -10,6 +9,9 @@ import org.bukkit.entity.Player;
 import java.util.*;
 
 public class CommandManager implements TabExecutor {
+
+    // Classe template para gerenciar comandos
+    // e subcomandos de um plugin
 
     private final Map<String, SubCommand> commands = new HashMap<>();
 
@@ -21,7 +23,6 @@ public class CommandManager implements TabExecutor {
     public CommandManager(String permissionPrefix, String prefix) {
         this.prefix = prefix;
         this.permissionPrefix = permissionPrefix;
-
     }
 
     public void registerSubCommand(String name, SubCommand subcommand) {
@@ -33,7 +34,7 @@ public class CommandManager implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (args.length == 0) {
-            sendMsg(sender,"Digite /"+ label +" help para ver os comandos.");
+            sendMsg(sender, "Digite /" + label + " help para ver os comandos.");
             return true;
         }
 
@@ -44,12 +45,12 @@ public class CommandManager implements TabExecutor {
         }
 
         if (command.inGameOnly() && !(sender instanceof Player)) {
-            sendMsg(sender,"Esse comando só pode ser executado em jogo.");
+            sendMsg(sender, "Esse comando só pode ser executado em jogo.");
 
             return true;
         }
 
-        if (!command.getPermission().isEmpty() && !sender.hasPermission(command.getPermission()) && !sender.hasPermission(permissionPrefix+".*")) {
+        if (!command.getPermission().isEmpty() && !sender.hasPermission(command.getPermission()) && !sender.hasPermission(permissionPrefix + ".*")) {
             sendMsg(sender, "§cVocê não tem permissão para isso.");
             return true;
         }
@@ -58,7 +59,7 @@ public class CommandManager implements TabExecutor {
         System.arraycopy(args, 1, subCmdArgs, 0, subCmdArgs.length);
 
         if (!command.onCommand(sender, subCmdArgs)) {
-            sendMsg(sender,"§cUso do comando: §e/"+label+" §7"  + command.getUsage() + "§c.");
+            sendMsg(sender, "§cUso do comando: §e/" + label + " §7" + command.getUsage() + "§c.");
         }
 
         return true;
@@ -78,7 +79,7 @@ public class CommandManager implements TabExecutor {
                 final String name = entry.getKey();
                 final SubCommand subcommand = entry.getValue();
 
-                if ((name.startsWith(typed) && ((sender.hasPermission(subcommand.getPermission()) || sender.hasPermission(permissionPrefix+".*")) || subcommand.getPermission().isEmpty()))) {
+                if ((name.startsWith(typed) && ((sender.hasPermission(subcommand.getPermission()) || sender.hasPermission(permissionPrefix + ".*")) || subcommand.getPermission().isEmpty()))) {
                     if (toReturn == null) {
                         toReturn = new LinkedList<>();
                     }

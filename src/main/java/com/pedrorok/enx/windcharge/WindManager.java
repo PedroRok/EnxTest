@@ -1,6 +1,6 @@
 package com.pedrorok.enx.windcharge;
 
- import com.pedrorok.enx.Main;
+import com.pedrorok.enx.Main;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,9 +18,13 @@ public class WindManager {
     private WindOptions windOptions;
     private boolean useCustomWind;
 
-    public WindManager() {
+    public WindManager(Main main) {
+        // Importando e inicializando as configurações do WindCharge
         windConfig = new WindConfig(this);
         windConfig.init();
+
+        // Registrando os eventos do WindCharge
+        main.getServer().getPluginManager().registerEvents(new WindEvents(this), main);
     }
 
 

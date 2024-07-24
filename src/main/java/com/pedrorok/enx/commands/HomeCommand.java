@@ -19,6 +19,7 @@ import java.util.List;
 public class HomeCommand extends CommandManager {
 
     private final HomeManager homeManager;
+
     public HomeCommand(HomeManager homeManager) {
         super("home", "§7[§fHomes§7] §r");
         this.homeManager = homeManager;
@@ -47,7 +48,7 @@ public class HomeCommand extends CommandManager {
             homeManager.teleportPlayer(p, "home");
             return true;
         }
-        if (super.onCommand(sender,cmd,label,args)) return true;
+        if (super.onCommand(sender, cmd, label, args)) return true;
         if (!homeManager.teleportPlayer(p, args[0])) {
             sendMsg(p, "§cEssa home não existe.");
         }

@@ -6,7 +6,7 @@ home:
   sound:
     volume: 1.0                             # default: 1.0 - Volume do som do WindCharge
     pitch: 0.7                              # default: 0.7 - Pitch do som do WindCharge
-    type: "ENTITY_ENDERMAN_TELEPORT"   # default: ENTITY_WIND_CHARGE_WIND_BURST - Som do WindCharge
+    type: "ENTITY_ENDERMAN_TELEPORT"        # default: ENTITY_WIND_CHARGE_WIND_BURST - Som do WindCharge
   particles:
     teleport-example:
       type: "PORTAL"

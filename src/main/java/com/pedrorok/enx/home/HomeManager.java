@@ -1,5 +1,7 @@
 package com.pedrorok.enx.home;
 
+import com.pedrorok.enx.Main;
+import com.pedrorok.enx.commands.HomeCommand;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +18,10 @@ import java.util.UUID;
  */
 public class HomeManager {
 
+    // Classe responsável por gerenciar as homes dos jogadores
+    // e manejar qualquer operação relacionada a homes
+    // resumidamente, o "cérebro" do módulo Home
+
     @Getter
     private final HomeConfig homeConfig;
     private final Map<UUID, PlayerHomes> homes;
@@ -24,10 +30,16 @@ public class HomeManager {
     @Setter(value = AccessLevel.PROTECTED)
     private HomeOptions homeOptions;
 
-    public HomeManager() {
+    public HomeManager(Main main) {
+        // Importa e inicia as configurações do módulo Home
         this.homeConfig = new HomeConfig(this);
         this.homeConfig.init();
+
+        // Map de homes cacheadas
         this.homes = new HashMap<>();
+
+        // Registra o comando /home
+        main.getServer().getPluginCommand("home").setExecutor(new HomeCommand(this));
     }
 
     public void setHomeDatabase(String url, String port, String database, String user, String password) {
@@ -77,28 +89,10 @@ public class HomeManager {
         return playerHomes;
     }
 
-    public PlayerHomes getPlayerByName(String playerName) {
-        for (Map.Entry<UUID, PlayerHomes> entry : homes.entrySet()) {
-            if (entry.getValue().getPlayerName().equalsIgnoreCase(playerName)) {
-                return entry.getValue();
-            }
-        }
-        if (homeDatabase == null) {
-            return null;
-        }
-        UUID uuid = homeDatabase.getPlayerByName(playerName);
-        if (uuid == null) {
-            return null;
-        }
-        PlayerHomes playerHomes = homeDatabase.getPlayerHomes(uuid);
-        return playerHomes;
-    }
-
     public void close() {
         if (homeDatabase == null) return;
         homeDatabase.close();
     }
-
 
     public boolean teleportPlayer(Player player, String home) {
         return teleportPlayer(player, getPlayerHome(player.getUniqueId(), home));
@@ -115,5 +109,4 @@ public class HomeManager {
         homeOptions.teleportPlayer(player, location);
         return true;
     }
-
 }

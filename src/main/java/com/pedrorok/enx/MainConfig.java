@@ -9,6 +9,7 @@ import com.pedrorok.enx.utils.XConfig;
 public class MainConfig extends XConfig {
 
     private final Main main;
+
     public MainConfig(Main main) {
         super("config.yml", main);
         this.main = main;
@@ -29,10 +30,13 @@ public class MainConfig extends XConfig {
         config.reloadConfig();
     }
 
+    // Importando se o Custom Wind está ativado
     public void loadWind() {
         main.getWindManager().setUseCustomWind(config.getBoolean("custom-windcharge"));
     }
 
+
+    // Importando dados do banco de dados
     public void loadDatabase() {
         String url = config.getString("database.host");
         String port = config.getString("database.port");

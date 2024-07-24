@@ -37,6 +37,6 @@ public abstract class SubCommand {
     }
 
     public boolean hasCmdPerm(CommandSender sender, String permission) {
-        return sender.hasPermission(permission) || sender.hasPermission(commandManager.getPermissionPrefix() + "."+permission);
+        return sender.hasPermission(permission) || sender.hasPermission(commandManager.getPermissionPrefix() + "." + permission);
     }
 }
