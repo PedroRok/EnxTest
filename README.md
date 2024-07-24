@@ -5,13 +5,28 @@
 Para instalar e configurar o ambiente de desenvolvimento, siga os passos abaixo:
 
 ```bash
-git clone https://github.com/PedroRok/enx-home-plugin.git 
-cd enx-home-plugin 
+git clone https://github.com/PedroRok/EnxTest.git
+cd EnxTest
 ./gradlew build
 ```
 - Será gerado um arquivo ``EnxTest-1.0-dev-all.jar`` na pasta ``build/libs``; <br>
-- Copie o arquivo para a pasta plugins do servidor Bukkit/Spigot/Paper; <br>
+- Copie o arquivo para a pasta plugins do servidor Bukkit/Spigot/Paper na versão 1.21; <br>
 - Inicie o servidor uma primeira vez para gerar os arquivos de configuração. <br>
+
+## Comandos
+
+- **/home [nome]** - Teleporta o jogador para a sua home; <br>
+- **/home set [nome]** - Define a home do jogador; <br>
+- **/home delete <nome>** - Deleta a home do jogador; <br>
+<br>
+- **/enx reload <wind/homes/database>** - Recarrega as configurações do plugin; <br>
+  - wind - Recarrega as configurações do WindCharge; <br>
+  - homes - Recarrega as configurações do Home; <br>
+  - database - Recarrega e reconecta no banco de dados; <br>
+
+``[opcional] - Parâmetro opcional`` <br>
+``<obrigatório> - Parâmetro obrigatório`` <br>
+
 
 ## Arquivos de Configuração
 
