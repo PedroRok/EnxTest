@@ -1,5 +1,6 @@
 package com.pedrorok.enx.home;
 
+import com.pedrorok.enx.Main;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.bukkit.Location;
@@ -25,8 +26,7 @@ public class HomeDatabase {
         try {
             Class.forName("org.mariadb.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("Driver JDBC do MariaDB não encontrado no classpath.");
+            Main.LOGGER.error("Driver JDBC do MariaDB não encontrado no classpath.");
             return;
         }
         try {
@@ -34,19 +34,20 @@ public class HomeDatabase {
             config.setJdbcUrl("jdbc:mariadb://" + dbUrl + ":" + port + "/" + dbName);
             config.setUsername(dbUser);
             if (dbPassword != null && !dbPassword.isEmpty()) {
-                System.out.println("Password: " + dbPassword);
                 config.setPassword(dbPassword);
             }
 
             dataSource = new HikariDataSource(config);
         } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Erro ao conectar ao banco de dados.");
+            Main.LOGGER.error("Erro ao conectar ao banco de dados.");
+            Main.LOGGER.error("Digite \"/enx reload database\" para tentar novamente.");
+            Main.LOGGER.error("Erro: " + e.getMessage());
         }
     }
 
 
     public void setupDatabase() {
+        if (dataSource == null) return;
         setupPlayersTable();
         setupHomesTable();
     }
@@ -66,6 +67,8 @@ public class HomeDatabase {
     }
 
     private void setupHomesTable() {
+        if (dataSource == null) return;
+
         String sql = "CREATE TABLE IF NOT EXISTS enx_homes (" +
                 "  id INT AUTO_INCREMENT PRIMARY KEY," +
                 "  playerUUID VARCHAR(36) NOT NULL," +
@@ -89,6 +92,7 @@ public class HomeDatabase {
     }
 
     public void addPlayer(UUID playerUUID, String name) {
+        if (dataSource == null) return;
         String sql = "INSERT IGNORE INTO enx_players (playerUUID, playerName) VALUES (?, ?)";
 
         try (Connection connection = dataSource.getConnection();
@@ -102,6 +106,7 @@ public class HomeDatabase {
     }
 
     public UUID getPlayerByName(String playerName) {
+        if (dataSource == null) return null;
         String sql = "SELECT playerUUID FROM enx_players WHERE playerName = ?";
 
         try (Connection connection = dataSource.getConnection();
@@ -119,6 +124,7 @@ public class HomeDatabase {
     }
 
     public void savePlayerHome(UUID playerUUID, String home, Location location) {
+        if (dataSource == null) return;
         String sql = "INSERT INTO enx_homes (playerUUID, homeName, homeX, homeY, homeZ, homeYaw, homePitch, homeWorld) VALUES (?, ?, ?, ?, ?, ?, ?, ?) " +
                 "ON DUPLICATE KEY UPDATE homeX = VALUES(homeX)," +
                 " homeY = VALUES(homeY)," +
@@ -148,6 +154,7 @@ public class HomeDatabase {
     }
 
     public void removePlayerHome(UUID playerUUID, String home) {
+        if (dataSource == null) return;
         String sql = "DELETE FROM enx_homes WHERE playerUUID = ? AND homeName = ?";
 
         try (Connection connection = dataSource.getConnection();
@@ -161,6 +168,7 @@ public class HomeDatabase {
     }
 
     public PlayerHomes getPlayerHomes(UUID playerUUID) {
+        if (dataSource == null) return null;
         String sql = "SELECT homeName, homeX, homeY, homeZ, homeYaw, homePitch, homeWorld FROM enx_homes WHERE playerUUID = ?";
 
         PlayerHomes playerHomes = new PlayerHomes(playerUUID.toString());

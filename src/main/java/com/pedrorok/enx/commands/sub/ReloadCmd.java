@@ -19,19 +19,19 @@ public class ReloadCmd extends SubCommand {
 
         switch (module) {
             case "wind":
+                sendMsg(sender, "§aRecarregando  configurações do WindCharge!");
                 Main.get().getMainConfig().reload();
                 Main.get().getMainConfig().loadWind();
                 Main.get().getWindManager().getWindConfig().reload();
-                sendMsg(sender, "§aConfiguração recarregada com sucesso!");
                 return true;
             case "database":
+                sendMsg(sender, "§aRecarregando banco de dados!");
                 Main.get().getMainConfig().reload();
                 Main.get().getMainConfig().loadDatabase();
-                sendMsg(sender, "§aMensagens recarregadas com sucesso!");
                 return true;
             case "homes":
+                sendMsg(sender, "§aRecarregando configurações de Home!");
                 Main.get().getHomeManager().getHomeConfig().reload();
-                sendMsg(sender, "§aConfiguração de homes recarregada com sucesso!");
                 return true;
             default:
                 sendMsg(sender, "§cMódulo não encontrado.");
