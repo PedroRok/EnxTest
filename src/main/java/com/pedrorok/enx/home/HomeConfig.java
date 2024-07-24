@@ -1,11 +1,9 @@
 package com.pedrorok.enx.home;
 
-import com.destroystokyo.paper.ParticleBuilder;
 import com.pedrorok.enx.Main;
 import com.pedrorok.enx.utils.XConfig;
-import org.bukkit.Particle;
+import com.pedrorok.enx.utils.XParticleBuilder;
 import org.bukkit.Sound;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +14,11 @@ import java.util.List;
  */
 public class HomeConfig extends XConfig {
 
+    // Classe responsável por carregar as configurações do plugin
+    // relacionadas ao módulo Home
+
     private final HomeManager homeManager;
+
     public HomeConfig(HomeManager homeManager) {
         super("home-config.yml", Main.get());
         this.homeManager = homeManager;
@@ -39,9 +41,9 @@ public class HomeConfig extends XConfig {
             Main.LOGGER.error("Invalid sound type in home.sound.sound");
         }
 
-        List<ParticleBuilder> particles = new ArrayList<>();
+        List<XParticleBuilder> particles = new ArrayList<>();
         for (String key : config.getSection("home.particles").getKeys(false)) {
-            ParticleBuilder particleBuilder = config.getParticleBuilder("home.particles." + key);
+            XParticleBuilder particleBuilder = config.getXParticleBuilder("home.particles." + key);
             if (particleBuilder == null) {
                 useSound = false;
                 break;

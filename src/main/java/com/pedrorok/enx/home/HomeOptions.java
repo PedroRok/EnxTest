@@ -1,8 +1,7 @@
 package com.pedrorok.enx.home;
 
-import com.destroystokyo.paper.ParticleBuilder;
-import com.mojang.datafixers.kinds.IdF;
 import com.pedrorok.enx.Main;
+import com.pedrorok.enx.utils.XParticleBuilder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +9,6 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,8 +19,11 @@ import java.util.List;
 @AllArgsConstructor
 public class HomeOptions {
 
+    // Classe responsável por armazenar as opções definidas na config do plugin
+    // e realizar a teleport do jogador para a home
+
     private final int cooldown;
-    private final List<ParticleBuilder> particles;
+    private final List<XParticleBuilder> particles;
 
     @Setter
     private boolean showParticles;
@@ -50,7 +51,7 @@ public class HomeOptions {
         }
         if (showParticles) {
             particles.forEach(particle -> {
-                ParticleBuilder clone = particle.clone();
+                XParticleBuilder clone = particle.clone();
                 clone.location(location);
                 double x = clone.offsetX();
                 double y = clone.offsetY();

@@ -1,8 +1,8 @@
 package com.pedrorok.enx.windcharge;
 
-import com.destroystokyo.paper.ParticleBuilder;
 import com.pedrorok.enx.Main;
 import com.pedrorok.enx.utils.XConfig;
+import com.pedrorok.enx.utils.XParticleBuilder;
 import org.bukkit.Sound;
 
 /**
@@ -10,6 +10,9 @@ import org.bukkit.Sound;
  * @project EnxTest
  */
 public class WindConfig extends XConfig {
+
+    // Classe responsável por carregar as configurações do plugin
+    // relacionadas ao módulo WindCharge
 
     private WindManager windManager;
 
@@ -42,7 +45,7 @@ public class WindConfig extends XConfig {
 
         // Importando as partículas
         for (String key : config.getSection("windcharge.particles").getKeys(false)) {
-            ParticleBuilder particleBuilder = config.getParticleBuilder("windcharge.particles." + key);
+            XParticleBuilder particleBuilder = config.getXParticleBuilder("windcharge.particles." + key);
             if (particleBuilder == null) {
                 windManager.setUseCustomWind(false);
                 return;
@@ -53,9 +56,7 @@ public class WindConfig extends XConfig {
     }
 
     @Override
-    public void save() {
-
-    }
+    public void save() {}
 
     @Override
     public void reload() {

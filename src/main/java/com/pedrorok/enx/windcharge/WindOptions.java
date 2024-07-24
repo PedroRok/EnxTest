@@ -1,8 +1,10 @@
 package com.pedrorok.enx.windcharge;
 
-import com.destroystokyo.paper.ParticleBuilder;
+import com.pedrorok.enx.utils.XParticleBuilder;
 import lombok.Getter;
-import org.bukkit.*;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -17,6 +19,9 @@ import java.util.List;
  */
 public class WindOptions {
 
+    // Classe responsável por armazenar as opções definidas na config do windcharge
+    // e realizar a explosão do windcharge
+
     private final double power;
     private final double size;
     @Getter
@@ -28,7 +33,7 @@ public class WindOptions {
     private final Sound sound;
 
     // Particle List
-    private final List<ParticleBuilder> particles;
+    private final List<XParticleBuilder> particles;
 
     public WindOptions(double power, double size, double velocity, float volume, float pitch, Sound sound) {
         this.power = power;
@@ -41,14 +46,14 @@ public class WindOptions {
     }
 
 
-    public void addParticle(ParticleBuilder particle) {
+    public void addParticle(XParticleBuilder particle) {
         particles.add(particle);
     }
 
     public void explode(Location location) {
         windExplode(location);
         particles.forEach(particle -> particle.clone().location(location).spawn());
-        location.getWorld().playSound(location, sound, volume,pitch);
+        location.getWorld().playSound(location, sound, volume, pitch);
     }
 
 
