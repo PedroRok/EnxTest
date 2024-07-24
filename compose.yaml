@@ -1,0 +1,14 @@
+services:
+  db:
+    image: mariadb
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: enxtest
+      MARIADB_DATABASE: enxtest
+    ports:
+      - "3306:3306"
+
+volumes:
+  db_data:
